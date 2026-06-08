@@ -5,8 +5,8 @@ const Contact = () => {
     <div className='max-w-6xl mx-auto px-4 py-10'>
       <div className='bg-white rounded-lg shadow p-6'>
         <h2 className='text-3xl font-bold mb-4 text-blue-600'>Contact</h2>
-        <p>Email: abheekmondal017@gmail.com</p>
-        <p>Phone: +91 6289619338</p>
+        <p>Email: sahilshaw123123@gmail.com</p>
+        <p>Phone: +91 9330123364</p>
       </div>
     </div>
   )

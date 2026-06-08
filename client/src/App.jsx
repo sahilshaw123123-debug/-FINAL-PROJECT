@@ -20,6 +20,11 @@ import InstructorDashboard from "./pages/InstructorDashboard";
 import StudentDashboard from "./pages/StudentDashboard";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import LiveClasses from "./pages/Liveclasses";
+import Createliveclass from "./pages/Createliveclass";
+import JoinLiveClass from "./pages/Joinliveclass";
+import CourseChatbot from "./pages/CourseChatbot";
+import Chatpage from "./pages/Chatpage";
 
 const App = () => {
   return (
@@ -30,7 +35,11 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
 
-         
+         <Route path="/live-classes" element={<LiveClasses />} />
+          <Route path="/create-live-class" element={<Createliveclass />} />
+          <Route path="/join-live-class/:id" element={<JoinLiveClass />} /> 
+          <Route path="/chat" element={<Chatpage/>}/>
+          <Route path="/course-chatbot" element={<CourseChatbot/>}/>
 
           <Route path="/add-course" element={<AddCourse />} />
           <Route path="/edit-course/:id" element={<EditCourse />} />

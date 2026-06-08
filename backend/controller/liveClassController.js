@@ -9,10 +9,10 @@ exports.createLiveclass = async (req, res) => {
     if (!title || !instructorName || !subject || !date || !time) {
       return res.status(400).json({ message: "All fields are required" });
     }
-    const roomName = title.tolowerCase().replace(/[^a-z0-9]/g, "-") + "-" + Date.now();
+    const roomName = title.toLowerCase().replace(/[^a-z0-9]/g, "-") + "-" + Date.now();
 
     const dailyres = await axios.post(
-      "https://api/.daily.co/v1/rooms",
+      "https://api.daily.co/v1/rooms",
       {
         name: roomName,
         privacy: "public",
@@ -25,7 +25,7 @@ exports.createLiveclass = async (req, res) => {
       },
       {
         headers: {
-          Authorization: `Bearer $(process.env.DAILY_API_KEY)`,
+          Authorization: `Bearer ${process.env.DAILY_API_KEY}`,
           "Content-Type": "application/json",
         },
       }
@@ -56,14 +56,23 @@ exports.createLiveclass = async (req, res) => {
 
 //fetch all live class
 exports.getliveclasses = async (req, res) => {
-  const classes = await Liveclass.find();
-  res.json(classes);
+  try {
+    const classes = await Liveclass.find();
+    res.json(classes);
+  } catch(error) {
+    res.status(500).json({ message: "Failed to fetch live classes" });
+  }
 }
 
 //singleview
 exports.getsingleliveclasses = async (req, res) => {
-  const classes = await Liveclass.findById(req.params.id);
-  res.json(classes);
+  try {
+    const classes = await Liveclass.findById(req.params.id);
+    if (!classes) return res.status(404).json({ message: "Class not found" });
+    res.json(classes);
+  } catch(error) {
+    res.status(500).json({ message: "Failed to fetch live class" });
+  }
 }
 //update liveclasses
 exports.updateliveclasses = async (req, res) => {

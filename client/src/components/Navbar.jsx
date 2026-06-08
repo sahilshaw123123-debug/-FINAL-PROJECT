@@ -3,7 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 const Navbar = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const user = JSON.parse(localStorage.getItem("user"));
+  const userStr = localStorage.getItem("user");
+  let user = null;
+  try { user = userStr ? JSON.parse(userStr) : null; } catch (e) {}
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -29,6 +31,29 @@ const Navbar = () => {
           <Link to="/" className="hover:text-blue-600">Home</Link>
           <Link to="/about" className="hover:text-blue-600">About</Link>
           <Link to="/contact" className="hover:text-blue-600">Contact</Link>
+          <Link to="/live-classes" className="hover:text-blue-600">Live Classes</Link>
+          <Link
+          to="/chat"
+          className="bg-purple-600 text-white px-4 py-2 rounded-lg"
+          >
+            Chat
+          </Link>
+           <Link
+          to="/course-chatbot"
+          className="bg-purple-600 text-white px-4 py-2 rounded-lg"
+          >
+            AI CHATBOT
+          </Link>
+          <Link to="/live-classes" className="hover:text-blue-600">Live classes</Link>
+          {
+          (user?.role ==="admin" ||  user?.role ==="instructor")  &&(
+          <Link
+              to="/create-live-class"
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+            >
+              Create live
+            </Link>
+         )}
           {
           user?.role ==="student" &&
           <Link to="/student-dashboard" className="hover:text-blue-600">

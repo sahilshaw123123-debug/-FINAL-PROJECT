@@ -47,7 +47,9 @@ const Home = () => {
   }, [search]);
 
   const handleDelete = async (id) => {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const userStr = localStorage.getItem("user");
+    let user = null;
+    try { user = userStr ? JSON.parse(userStr) : null; } catch (e) {}
     const token = localStorage.getItem("token");
 
     if (!token) {
